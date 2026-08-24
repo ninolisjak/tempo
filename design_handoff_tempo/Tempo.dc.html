@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="stylesheet" href="_ds/nocturne-0064e586-ae39-477a-bca8-027892c6670f/styles.css">
+<script src="_ds/nocturne-0064e586-ae39-477a-bca8-027892c6670f/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Inter:opsz,wght@14..32,400;14..32,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#161826;font-family:Inter,system-ui,sans-serif}
+a{color:#b5abfc;text-decoration:none}a:hover{color:#d2cefd}
+*{scrollbar-width:none;-ms-overflow-style:none}*::-webkit-scrollbar{width:0;height:0;display:none}
+input::placeholder,textarea::placeholder{color:#75798c}
+input,textarea,button{font-family:inherit}
+*:focus-visible{outline:2px solid #9184d9;outline-offset:2px}
+input[type=range]{accent-color:#9184d9}
+@keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+@keyframes halo{0%,100%{box-shadow:0 0 0 1px #9184d9,0 0 0 rgba(145,132,217,0)}50%{box-shadow:0 0 0 1px #b5abfc,0 0 22px rgba(145,132,217,.45)}}
+@keyframes drift{0%{transform:translate3d(0,0,0) scale(1.04)}100%{transform:translate3d(-2%,-1.5%,0) scale(1.12)}}
+</style>
+</helmet>
+<div style="min-height:100vh;box-sizing:border-box;display:flex;gap:52px;align-items:center;justify-content:center;padding:44px 34px;background:radial-gradient(90% 60% at 80% 0%,#262a60 0%,#1a1c2d 42%,#161826 100%)">
+
+  <div style="width:242px;display:flex;flex-direction:column;gap:20px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:7px">
+        <div style="display:flex;align-items:flex-end;gap:2px;height:13px">
+          <div style="width:2.5px;height:100%;background:#9184d9;transform-origin:bottom;animation:eq .9s ease-in-out infinite"></div>
+          <div style="width:2.5px;height:100%;background:#9184d9;transform-origin:bottom;animation:eq .9s ease-in-out .3s infinite"></div>
+          <div style="width:2.5px;height:100%;background:#9184d9;transform-origin:bottom;animation:eq .9s ease-in-out .6s infinite"></div>
+        </div>
+        <div style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#b5abfc">NOW PLAYING · 25 AUG</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:44px;height:44px;flex:none;border-radius:13px;background:linear-gradient(150deg,#b5abfc 0%,#796cbf 55%,#423a6a 100%);box-shadow:0 0 0 1px rgba(181,171,252,0.5),0 6px 16px rgba(93,82,148,0.45);display:flex;align-items:flex-end;justify-content:center;gap:3px;padding-bottom:11px;box-sizing:border-box">
+          <div style="width:4px;height:10px;border-radius:4px;background:#1a1c2b"></div>
+          <div style="width:4px;height:20px;border-radius:4px;background:#f3f5fe"></div>
+          <div style="width:4px;height:14px;border-radius:4px;background:#1a1c2b"></div>
+        </div>
+        <div style="display:flex;align-items:flex-end;gap:2px">
+          <div style="font:600 42px/0.86 'Bricolage Grotesque',sans-serif;letter-spacing:-.05em;color:#f3f5fe">tempo</div>
+          <div style="width:7px;height:7px;border-radius:999px;background:#b5abfc;margin-bottom:5px"></div>
+        </div>
+      </div>
+      <div style="font:400 13px/1.65 Inter,sans-serif;color:#9397ab">One photo, one song, once a day. The player sits on the photo as a small card you place yourself.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:5px">
+      <button onClick="{{ goFeed }}" style="text-align:left;cursor:pointer;background:transparent;border:1px solid #3f424d;border-radius:8px;padding:9px 11px;font:400 12px/1 Inter,sans-serif;color:#e9e9ed" style-hover="border-color:#9184d9;color:#d2cefd">Feed</button>
+      <button onClick="{{ goCamera }}" style="text-align:left;cursor:pointer;background:transparent;border:1px solid #3f424d;border-radius:8px;padding:9px 11px;font:400 12px/1 Inter,sans-serif;color:#e9e9ed" style-hover="border-color:#9184d9;color:#d2cefd">Camera</button>
+      <button onClick="{{ goSong }}" style="text-align:left;cursor:pointer;background:transparent;border:1px solid #3f424d;border-radius:8px;padding:9px 11px;font:400 12px/1 Inter,sans-serif;color:#e9e9ed" style-hover="border-color:#9184d9;color:#d2cefd">Song search</button>
+      <button onClick="{{ goCompose }}" style="text-align:left;cursor:pointer;background:transparent;border:1px solid #3f424d;border-radius:8px;padding:9px 11px;font:400 12px/1 Inter,sans-serif;color:#e9e9ed" style-hover="border-color:#9184d9;color:#d2cefd">Place the player</button>
+      <button onClick="{{ goProfile }}" style="text-align:left;cursor:pointer;background:transparent;border:1px solid #3f424d;border-radius:8px;padding:9px 11px;font:400 12px/1 Inter,sans-serif;color:#e9e9ed" style-hover="border-color:#9184d9;color:#d2cefd">Your archive</button>
+    </div>
+    <div style="font:400 11px/1.7 'JetBrains Mono',monospace;color:#75798c;border-top:1px solid #292b31;padding-top:12px">TAP A BAR → PLAY STATE<br>COMPOSE: DRAG · KNOB · SLIDERS</div>
+  </div>
+
+  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" dark="{{ true }}" hint-size="402px,874px">
+    <div style="height:100%;position:relative;overflow:hidden;background:#161826;display:flex;flex-direction:column">
+
+      <sc-if value="{{ isFeed }}" hint-placeholder-val="{{ true }}">
+        <div style="height:100%;display:flex;flex-direction:column">
+          <div style="flex:none;padding:60px 18px 16px;background:linear-gradient(170deg,#262a60 0%,#1e2140 55%,#161826 100%)">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:18px">
+              <div style="width:26px;height:26px;flex:none;border-radius:8px;background:linear-gradient(150deg,#b5abfc 0%,#796cbf 55%,#423a6a 100%);box-shadow:0 0 0 1px rgba(181,171,252,0.5),0 6px 16px rgba(93,82,148,0.45);display:flex;align-items:flex-end;justify-content:center;gap:2px;padding-bottom:6px;box-sizing:border-box">
+          <div style="width:2.5px;height:6px;border-radius:2.5px;background:#1a1c2b"></div>
+          <div style="width:2.5px;height:12px;border-radius:2.5px;background:#f3f5fe"></div>
+          <div style="width:2.5px;height:9px;border-radius:2.5px;background:#1a1c2b"></div>
+        </div>
+              <div style="display:flex;align-items:flex-end;gap:1.5px">
+                <div style="font:600 21px/0.9 'Bricolage Grotesque',sans-serif;letter-spacing:-.05em;color:#f3f5fe">tempo</div>
+                <div style="width:4px;height:4px;border-radius:999px;background:#b5abfc;margin-bottom:3px"></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;justify-content:space-between">
+              <div>
+                <div style="font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:#b5abfc;margin-bottom:7px">TUESDAY</div>
+                <div style="display:flex;align-items:baseline;gap:8px">
+                  <div style="font:600 54px/0.86 'Bricolage Grotesque',sans-serif;letter-spacing:-.05em;color:#f3f5fe">25</div>
+                  <div style="font:400 13px/1.1 'Bricolage Grotesque',sans-serif;color:#9397ab">August<br>2026</div>
+                </div>
+              </div>
+              <button onClick="{{ goProfile }}" style="cursor:pointer;padding:0;background:transparent;border:none;display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+                <div style="font:600 22px/1 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em;color:#d2cefd">31</div>
+                <div style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9397ab">DAY STREAK</div>
+              </button>
+            </div>
+
+            <div style="margin-top:20px;display:flex;gap:16px;overflow:auto;padding-bottom:2px">
+              <sc-for list="{{ friends }}" as="f" hint-placeholder-count="5">
+                <div style="flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;width:44px">
+                  <div style="position:relative;width:44px;height:44px;border-radius:999px;padding:2px;box-sizing:border-box;background:{{ f.rim }}">
+                    <div style="width:100%;height:100%;border-radius:999px;overflow:hidden;background:radial-gradient(120% 120% at 30% 20%,#595d6c,#2b2741 70%);opacity:{{ f.dim }}"></div>
+                  </div>
+                  <div style="font:500 10px/1 'JetBrains Mono',monospace;color:{{ f.nameColor }};max-width:48px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ f.short }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="flex:1;overflow:auto;padding:18px 0 128px">
+            <sc-if value="{{ posted }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 14px;margin-bottom:30px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">
+                  <div style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#b5abfc">YOU · JUST NOW</div>
+                  <div style="flex:1;height:1px;background:linear-gradient(90deg,#3f424d,rgba(63,66,77,0))"></div>
+                </div>
+                <div style="position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 0 0 1px #3f424d,0 20px 44px rgba(0,0,0,0.5)">
+                  <div style="position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(233,233,237,0.05) 0 12px,rgba(233,233,237,0.014) 12px 24px),linear-gradient(150deg,#4c5397,#2b2741 58%,#1a1c28);animation:drift 22s ease-in-out infinite alternate"></div>
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(243,245,254,0.42)">YOUR PHOTO</div>
+                  <div onClick="{{ openMine }}" style="position:absolute;cursor:pointer;left:{{ myX }}%;top:{{ myY }}%;width:{{ myW }}%;transform:{{ myTransform }}">
+                    <div style="padding:8px;border-radius:12px;background:{{ myFrost }};backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 0 0 1px rgba(243,245,254,0.2),0 12px 30px rgba(0,0,0,0.5)">
+                      <div style="width:100%;aspect-ratio:1;border-radius:8px;background:repeating-linear-gradient(135deg,rgba(243,245,254,0.34) 0 6px,rgba(243,245,254,0.12) 6px 12px)"></div>
+                      <div style="padding:8px 1px 0;display:flex;flex-direction:column;gap:2px">
+                        <div style="font:500 12px/1.2 Inter,sans-serif;color:#f3f5fe;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ myTitle }}</div>
+                        <div style="font:400 10px/1.2 Inter,sans-serif;color:rgba(243,245,254,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ myArtist }}</div>
+                      </div>
+                      <div style="margin:8px 1px 7px;height:2px;border-radius:999px;background:rgba(243,245,254,0.28);position:relative">
+                        <div style="position:absolute;left:0;top:0;bottom:0;width:38%;border-radius:999px;background:#b5abfc"></div>
+                      </div>
+                      <div style="display:flex;align-items:center;justify-content:space-between;padding:0 1px 1px">
+                        <div style="display:flex;align-items:flex-end;gap:2px;height:12px">
+                          <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out infinite"></div>
+                          <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out .25s infinite"></div>
+                          <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out .5s infinite"></div>
+                        </div>
+                        <div style="width:24px;height:24px;border-radius:999px;background:rgba(243,245,254,0.92);display:flex;align-items:center;justify-content:center;color:#161826"><i class="ph ph-play" style="font-size:10px"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="margin-top:10px;font:400 14px/1.5 Inter,sans-serif;color:#cfd3e5">{{ myCaption }}</div>
+              </div>
+            </sc-if>
+
+            <sc-for list="{{ posts }}" as="p" hint-placeholder-count="2">
+              <div style="padding:0 14px;margin-bottom:34px">
+                <div style="display:flex;align-items:flex-end;gap:9px;margin-bottom:9px">
+                  <div style="font:600 26px/0.9 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;color:#e9e9ed">{{ p.name }}</div>
+                  <div style="flex:1;height:1px;background:linear-gradient(90deg,rgba(63,66,77,0),#3f424d,rgba(63,66,77,0));margin-bottom:5px"></div>
+                  <div style="font:400 9.5px/1 'JetBrains Mono',monospace;color:#75798c;margin-bottom:4px">{{ p.time }}</div>
+                </div>
+                <div style="position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 0 0 1px #3f424d,0 20px 44px rgba(0,0,0,0.5)">
+                  <div style="position:absolute;inset:0;background:{{ p.photo }};animation:drift 26s ease-in-out infinite alternate"></div>
+                  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:rgba(243,245,254,0.4)">{{ p.label }}</div>
+                  <div style="position:absolute;top:11px;left:12px;display:flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;background:rgba(22,24,38,0.5);backdrop-filter:blur(10px);font:400 8.5px/1 'JetBrains Mono',monospace;letter-spacing:.1em;color:rgba(243,245,254,0.8)">
+                    <span style="width:4px;height:4px;border-radius:999px;background:#9184d9;display:block"></span>{{ p.place }}
+                  </div>
+                  <div onClick="{{ p.open }}" style="position:absolute;cursor:pointer;left:{{ p.x }}%;top:{{ p.y }}%;width:{{ p.w }}%;transform:{{ p.rot }}">
+                    <div style="padding:8px;border-radius:12px;background:{{ p.frost }};backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 0 0 1px rgba(243,245,254,0.2),0 12px 30px rgba(0,0,0,0.5)">
+                      <div style="width:100%;aspect-ratio:1;border-radius:8px;background:repeating-linear-gradient(135deg,rgba(243,245,254,0.34) 0 6px,rgba(243,245,254,0.12) 6px 12px)"></div>
+                      <div style="padding:8px 1px 0;display:flex;flex-direction:column;gap:2px">
+                        <div style="font:500 12px/1.2 Inter,sans-serif;color:#f3f5fe;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.song }}</div>
+                        <div style="font:400 10px/1.2 Inter,sans-serif;color:rgba(243,245,254,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.artist }}</div>
+                      </div>
+                      <div style="margin:8px 1px 7px;height:2px;border-radius:999px;background:rgba(243,245,254,0.28);position:relative">
+                        <div style="position:absolute;left:0;top:0;bottom:0;width:38%;border-radius:999px;background:#b5abfc"></div>
+                      </div>
+                      <div style="display:flex;align-items:center;justify-content:space-between;padding:0 1px 1px">
+                        <div style="display:flex;align-items:flex-end;gap:2px;height:12px">
+                          <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out infinite"></div>
+                          <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out .25s infinite"></div>
+                          <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out .5s infinite"></div>
+                        </div>
+                        <div style="width:24px;height:24px;border-radius:999px;background:rgba(243,245,254,0.92);display:flex;align-items:center;justify-content:center;color:#161826"><i class="ph ph-play" style="font-size:10px"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div style="margin-top:10px;display:flex;align-items:flex-start;gap:10px">
+                  <div style="flex:1;font:400 14px/1.5 Inter,sans-serif;color:#cfd3e5">{{ p.caption }}</div>
+                  <div style="flex:none;font:400 9.5px/1 'JetBrains Mono',monospace;color:#595d6c;padding-top:4px">{{ p.dur }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="position:absolute;left:0;right:0;bottom:0;padding:14px 20px 30px;background:linear-gradient(180deg,rgba(22,24,38,0) 0%,#161826 26%);border-top:1px solid rgba(63,66,77,0.5);display:flex;align-items:center;gap:14px">
+            <div style="flex:none;width:52px;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#e9e9ed">FEED</div>
+            <button onClick="{{ goCamera }}" style="flex:1;justify-content:center;white-space:nowrap;cursor:pointer;height:46px;padding:0 18px;border-radius:999px;border:none;background:#1c1e2c;color:#d2cefd;font:500 13.5px/1 Inter,sans-serif;display:flex;align-items:center;gap:9px;animation:halo 3.2s ease-in-out infinite">
+              <span style="width:7px;height:7px;border-radius:999px;background:#9184d9;display:block"></span>Post today
+            </button>
+            <button onClick="{{ goProfile }}" style="flex:none;width:52px;text-align:right;cursor:pointer;background:none;border:none;padding:0;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#75798c" style-hover="color:#d2cefd">ARCHIVE</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCamera }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;display:flex;flex-direction:column;background:#121422">
+          <div style="flex:none;padding:54px 18px 8px;display:flex;align-items:center;justify-content:space-between">
+            <button onClick="{{ goFeed }}" style="cursor:pointer;background:none;border:none;padding:0;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9397ab">CLOSE</button>
+            <div style="font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#e9e9ed">{{ lensLabel }}</div>
+            <div style="width:44px"></div>
+          </div>
+          <div style="flex:1;display:flex;align-items:center;padding:6px 14px 0">
+            <div style="position:relative;width:100%;aspect-ratio:3/4;border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px #292b31">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(233,233,237,0.06) 0 12px,rgba(233,233,237,0.015) 12px 24px),linear-gradient(150deg,#4c5397,#2b2741 60%,#191b27);animation:drift 18s ease-in-out infinite alternate"></div>
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(243,245,254,0.5)">{{ viewfinderLabel }}</div>
+              <div style="position:absolute;left:14px;bottom:14px;font:600 30px/0.9 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;color:rgba(243,245,254,0.28)">25<span style="font:400 11px/1 'JetBrains Mono',monospace;letter-spacing:.1em"> AUG</span></div>
+            </div>
+          </div>
+          <div style="flex:none;padding:18px 24px 38px;display:flex;flex-direction:column;gap:16px">
+            <div style="align-self:center;display:flex;gap:4px;padding:3px;border-radius:999px;border:1px solid #3f424d">
+              <button onClick="{{ useBack }}" style="cursor:pointer;border:none;border-radius:999px;padding:8px 16px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em;background:{{ backChipBg }};color:{{ backChipFg }}">BACK</button>
+              <button onClick="{{ useFront }}" style="cursor:pointer;border:none;border-radius:999px;padding:8px 16px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.1em;background:{{ frontChipBg }};color:{{ frontChipFg }}">FRONT</button>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:center">
+              <button onClick="{{ capture }}" style="cursor:pointer;width:76px;height:76px;border-radius:999px;background:transparent;border:none;display:flex;align-items:center;justify-content:center;padding:0;animation:halo 2.6s ease-in-out infinite">
+                <div style="width:58px;height:58px;border-radius:999px;background:linear-gradient(160deg,#b5abfc,#796cbf)"></div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isSong }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;display:flex;flex-direction:column">
+          <div style="flex:none;padding:54px 18px 8px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <button onClick="{{ goCamera }}" style="cursor:pointer;background:none;border:none;padding:0;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9397ab">RETAKE</button>
+              <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#75798c">2 / 3</div>
+            </div>
+            <div style="font:600 30px/1.02 'Bricolage Grotesque',sans-serif;letter-spacing:-.035em;color:#f3f5fe">What's on<br>repeat today?</div>
+            <div style="display:flex;align-items:center;gap:8px;border-radius:999px;padding:11px 15px;background:#1c1e2c;box-shadow:0 0 0 1px #3f424d">
+              <i class="ph ph-magnifying-glass" style="font-size:14px;color:#75798c"></i>
+              <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="Song or artist" style="flex:1;background:none;border:none;outline:none;font:400 13.5px/1 Inter,sans-serif;color:#e9e9ed" />
+            </div>
+          </div>
+          <div style="flex:1;overflow:auto;padding:10px 12px 12px">
+            <sc-for list="{{ results }}" as="s" hint-placeholder-count="5">
+              <div onClick="{{ s.pick }}" style="cursor:pointer;display:flex;align-items:center;gap:12px;padding:9px 11px;border-radius:10px;background:{{ s.bg }};box-shadow:{{ s.ring }};margin-bottom:6px">
+                <div style="width:42px;height:42px;flex:none;border-radius:6px;background:repeating-linear-gradient(135deg,rgba(233,233,237,0.16) 0 5px,rgba(233,233,237,0.05) 5px 10px)"></div>
+                <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+                  <div style="font:500 14px/1.15 Inter,sans-serif;color:#e9e9ed;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.t }}</div>
+                  <div style="font:400 11.5px/1 Inter,sans-serif;color:#9397ab;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.a }}</div>
+                </div>
+                <div style="font:400 10.5px/1 'JetBrains Mono',monospace;color:{{ s.durColor }}">{{ s.d }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="flex:none;padding:11px 18px 32px;display:flex;align-items:center;gap:11px;border-top:1px solid #292b31">
+            <div style="flex:1;font:400 10.5px/1.4 'JetBrains Mono',monospace;color:#75798c">{{ pickedLabel }}</div>
+            <button onClick="{{ goCompose }}" style="cursor:pointer;border:1px solid #9184d9;border-radius:999px;background:transparent;color:#d2cefd;padding:12px 22px;font:500 13px/1 Inter,sans-serif" style-hover="background:rgba(145,132,217,0.14)">Next</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isCompose }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;display:flex;flex-direction:column">
+          <div style="flex:none;padding:54px 18px 8px;display:flex;align-items:center;justify-content:space-between">
+            <button onClick="{{ goSong }}" style="cursor:pointer;background:none;border:none;padding:0;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9397ab">BACK</button>
+            <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#75798c">DRAG · KNOB ROTATES</div>
+          </div>
+          <div style="flex:1;overflow:auto;padding:6px 18px 12px">
+            <div style="position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;touch-action:none;box-shadow:0 0 0 1px #3f424d">
+              <div style="position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(233,233,237,0.05) 0 12px,rgba(233,233,237,0.014) 12px 24px),linear-gradient(150deg,#4c5397,#2b2741 58%,#1a1c28)"></div>
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 9.5px/1 'JetBrains Mono',monospace;letter-spacing:.16em;color:rgba(243,245,254,0.4)">{{ viewfinderLabel }}</div>
+              <div onPointerDown="{{ onDown }}" style="position:absolute;cursor:grab;left:{{ myX }}%;top:{{ myY }}%;width:{{ myW }}%;transform:{{ myTransform }};touch-action:none">
+                <div style="padding:8px;border-radius:12px;background:{{ myFrost }};backdrop-filter:blur(18px) saturate(1.3);box-shadow:0 0 0 1px rgba(243,245,254,0.2),0 12px 30px rgba(0,0,0,0.5)">
+                  <div style="width:100%;aspect-ratio:1;border-radius:8px;background:repeating-linear-gradient(135deg,rgba(243,245,254,0.34) 0 6px,rgba(243,245,254,0.12) 6px 12px)"></div>
+                  <div style="padding:8px 1px 0;display:flex;flex-direction:column;gap:2px">
+                    <div style="font:500 12px/1.2 Inter,sans-serif;color:#f3f5fe;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ myTitle }}</div>
+                    <div style="font:400 10px/1.2 Inter,sans-serif;color:rgba(243,245,254,0.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ myArtist }}</div>
+                  </div>
+                  <div style="margin:8px 1px 7px;height:2px;border-radius:999px;background:rgba(243,245,254,0.28);position:relative">
+                    <div style="position:absolute;left:0;top:0;bottom:0;width:38%;border-radius:999px;background:#b5abfc"></div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:0 1px 1px">
+                    <div style="display:flex;align-items:flex-end;gap:2px;height:12px">
+                      <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out infinite"></div>
+                      <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out .25s infinite"></div>
+                      <div style="width:2px;height:100%;background:#b5abfc;transform-origin:bottom;animation:eq .8s ease-in-out .5s infinite"></div>
+                    </div>
+                    <div style="width:24px;height:24px;border-radius:999px;background:rgba(243,245,254,0.92);display:flex;align-items:center;justify-content:center;color:#161826"><i class="ph ph-play" style="font-size:10px"></i></div>
+                  </div>
+                    </div>
+                <div onPointerDown="{{ onRotDown }}" style="position:absolute;right:-9px;bottom:-9px;width:20px;height:20px;border-radius:999px;background:#161826;border:1px solid #9184d9;cursor:grab;display:flex;align-items:center;justify-content:center;color:#d2cefd;touch-action:none"><i class="ph ph-arrow-counter-clockwise" style="font-size:11px"></i></div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;align-items:center;gap:11px;border-radius:10px;padding:9px 12px;box-shadow:0 0 0 1px #292b31">
+                <span style="width:38px;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.1em;color:#75798c">SIZE</span>
+                <input type="range" min="26" max="62" step="1" value="{{ myW }}" onChange="{{ onSize }}" style="flex:1" />
+                <span style="width:34px;text-align:right;font:400 9.5px/1 'JetBrains Mono',monospace;color:#9397ab">{{ sizeLabel }}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px;border-radius:10px;padding:9px 12px;box-shadow:0 0 0 1px #292b31">
+                <span style="width:38px;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.1em;color:#75798c">TILT</span>
+                <input type="range" min="-20" max="20" step="1" value="{{ rotate }}" onChange="{{ onRotate }}" style="flex:1" />
+                <span style="width:34px;text-align:right;font:400 9.5px/1 'JetBrains Mono',monospace;color:#9397ab">{{ tiltLabel }}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:11px;border-radius:10px;padding:9px 12px;box-shadow:0 0 0 1px #292b31">
+                <span style="width:38px;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.1em;color:#75798c">FROST</span>
+                <input type="range" min="6" max="62" step="1" value="{{ frost }}" onChange="{{ onFrost }}" style="flex:1" />
+                <span style="width:34px;text-align:right;font:400 9.5px/1 'JetBrains Mono',monospace;color:#9397ab">{{ frostLabel }}</span>
+              </div>
+            </div>
+
+            <textarea value="{{ caption }}" onChange="{{ onCaption }}" placeholder="Add a note (optional)" style="margin-top:9px;width:100%;box-sizing:border-box;min-height:54px;resize:none;background:#1c1e2c;border:none;box-shadow:0 0 0 1px #3f424d;border-radius:10px;padding:11px;outline:none;font:400 13.5px/1.45 Inter,sans-serif;color:#e9e9ed"></textarea>
+          </div>
+          <div style="flex:none;padding:11px 18px 32px;border-top:1px solid #292b31">
+            <button onClick="{{ post }}" style="cursor:pointer;width:100%;border:1px solid #9184d9;border-radius:999px;background:transparent;color:#d2cefd;padding:14px;font:500 15px/1 Inter,sans-serif" style-hover="background:rgba(145,132,217,0.14)">Share with friends</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;display:flex;flex-direction:column">
+          <div style="flex:none;padding:52px 18px 14px;background:linear-gradient(170deg,#262a60 0%,#1e2140 60%,#161826 100%)">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+              <button onClick="{{ goFeed }}" style="cursor:pointer;background:none;border:none;padding:0;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#b5abfc;display:flex;align-items:center;gap:5px"><i class="ph ph-arrow-left" style="font-size:12px"></i>FEED</button>
+              <div style="font:400 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;color:#9397ab">ARCHIVE</div>
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:12px">
+              <div style="width:56px;height:56px;border-radius:12px;background:repeating-linear-gradient(135deg,rgba(233,233,237,0.2) 0 5px,rgba(233,233,237,0.06) 5px 10px);box-shadow:0 0 0 1px #595d6c"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font:600 30px/0.95 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;color:#f3f5fe">Sam Ortiz</div>
+                <div style="margin-top:5px;font:400 10.5px/1 'JetBrains Mono',monospace;color:#9397ab">@samo · 128 DAYS · 31 STREAK</div>
+              </div>
+            </div>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;background:rgba(22,24,38,0.45);box-shadow:0 0 0 1px #3f424d">
+              <div style="display:flex;align-items:flex-end;gap:2px;height:13px">
+                <div style="width:2px;height:100%;background:#9184d9;transform-origin:bottom;animation:eq 1s ease-in-out infinite"></div>
+                <div style="width:2px;height:100%;background:#9184d9;transform-origin:bottom;animation:eq 1s ease-in-out .3s infinite"></div>
+                <div style="width:2px;height:100%;background:#9184d9;transform-origin:bottom;animation:eq 1s ease-in-out .6s infinite"></div>
+              </div>
+              <div style="flex:1;font:400 11px/1.3 Inter,sans-serif;color:#cfd3e5">Most played this month · <span style="color:#d2cefd">Mazzy Star</span></div>
+            </div>
+          </div>
+          <div style="flex:1;overflow:auto;padding:14px 18px 34px">
+            <div style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#75798c;margin-bottom:10px">AUGUST</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+              <sc-for list="{{ archive }}" as="a" hint-placeholder-count="9">
+                <div onClick="{{ a.open }}" style="cursor:pointer;position:relative;border-radius:10px;overflow:hidden;aspect-ratio:3/4;background:{{ a.photo }};box-shadow:0 0 0 1px #292b31">
+                  <div style="position:absolute;top:6px;left:8px;font:600 15px/1 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em;color:rgba(243,245,254,0.75)">{{ a.day }}</div>
+                  <div style="position:absolute;left:5px;right:5px;bottom:5px;display:flex;align-items:center;gap:5px;padding:4px 5px;border-radius:6px;background:rgba(22,24,38,0.52);backdrop-filter:blur(10px)">
+                    <div style="width:12px;height:12px;flex:none;border-radius:2px;background:repeating-linear-gradient(135deg,rgba(243,245,254,0.36) 0 3px,rgba(243,245,254,0.12) 3px 6px)"></div>
+                    <div style="flex:1;min-width:0;font:400 10px/1.15 Inter,sans-serif;color:rgba(243,245,254,0.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ a.song }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ sheet }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ closeSheet }}" style="position:absolute;inset:0;z-index:70;background:rgba(12,13,22,0.66);display:flex;flex-direction:column;justify-content:flex-end">
+          <div style="background:linear-gradient(180deg,#20233a,#1c1e2c 40%);border-radius:16px 16px 0 0;padding:18px 16px 34px;display:flex;flex-direction:column;gap:14px;box-shadow:0 0 0 1px #3f424d,0 -18px 44px rgba(0,0,0,0.6)">
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="width:52px;height:52px;flex:none;border-radius:8px;background:repeating-linear-gradient(135deg,rgba(233,233,237,0.18) 0 5px,rgba(233,233,237,0.05) 5px 10px)"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font:600 19px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.03em;color:#f3f5fe">{{ sheetTitle }}</div>
+                <div style="margin-top:3px;font:400 11.5px/1.3 Inter,sans-serif;color:#9397ab">{{ sheetArtist }}</div>
+              </div>
+              <div style="font:400 10px/1 'JetBrains Mono',monospace;color:#75798c">{{ sheetDur }}</div>
+            </div>
+            <div style="font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:.14em;color:#75798c">OPEN IN YOUR APP</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ services }}" as="sv" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:11px;padding:12px;border-radius:10px;box-shadow:0 0 0 1px #3f424d;cursor:pointer" style-hover="box-shadow:0 0 0 1px #9184d9;background:rgba(145,132,217,0.1)">
+                  <div style="width:24px;height:24px;border-radius:6px;background:repeating-linear-gradient(135deg,rgba(233,233,237,0.16) 0 4px,rgba(233,233,237,0.05) 4px 8px)"></div>
+                  <div style="flex:1;font:500 13.5px/1 Inter,sans-serif;color:#e9e9ed">{{ sv.n }}</div>
+                  <i class="ph ph-arrow-square-out" style="font-size:14px;color:#9184d9"></i>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </x-import>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:760,&quot;height&quot;:980}}">
+const SONGS = [
+  { t: 'Fade Into You', a: 'Mazzy Star', d: '4:56' },
+  { t: 'Cranes in the Sky', a: 'Solange', d: '4:12' },
+  { t: 'Tape Loop', a: 'Morcheeba', d: '5:03' },
+  { t: 'Nightshift', a: 'Lucy Dacus', d: '4:22' },
+  { t: 'Weightless', a: 'Marconi Union', d: '8:08' },
+  { t: 'Motion Sickness', a: 'Phoebe Bridgers', d: '3:48' },
+  { t: 'Rylan', a: 'Sufjan Stevens', d: '4:31' },
+];
+
+const STRIPE = 'repeating-linear-gradient(115deg,rgba(233,233,237,0.05) 0 12px,rgba(233,233,237,0.014) 12px 24px),';
+const PHOTOS = [
+  STRIPE + 'linear-gradient(150deg,#4c5397,#2b2741 58%,#1a1c28)',
+  STRIPE + 'linear-gradient(200deg,#595d6c,#262a60 62%,#191b27)',
+  STRIPE + 'linear-gradient(130deg,#353b80,#3f424d 55%,#1a1c28)',
+];
+
+const POSTS = [
+  { name: 'Maya', place: 'OCEAN BEACH', time: '06:14', label: 'MORNING SURF', song: 'Fade Into You', artist: 'Mazzy Star', dur: '4:56', caption: 'first light, nobody out yet', x: 50, y: 44, w: 40, rot: 'rotate(-3deg)', frost: 'rgba(28,30,44,0.3)', photo: PHOTOS[0] },
+  { name: 'Theo', place: 'MISSION ROOFTOP', time: '13:02', label: 'ROOF LUNCH', song: 'Tape Loop', artist: 'Morcheeba', dur: '5:03', caption: 'roof lunch, no notes', x: 9, y: 12, w: 36, rot: 'rotate(3deg)', frost: 'rgba(28,30,44,0.24)', photo: PHOTOS[1] },
+  { name: 'Ines', place: 'BERNAL HEIGHTS', time: '19:41', label: 'GOLDEN HOUR', song: 'Cranes in the Sky', artist: 'Solange', dur: '4:12', caption: 'walked home the long way', x: 33, y: 55, w: 46, rot: 'rotate(-6deg)', frost: 'rgba(28,30,44,0.4)', photo: PHOTOS[2] },
+];
+
+const FRIENDS = [
+  { short: 'MAYA', posted: true }, { short: 'THEO', posted: true }, { short: 'INES', posted: true },
+  { short: 'JUNO', posted: false }, { short: 'PABLO', posted: false }, { short: 'RIA', posted: false },
+];
+
+const ARCHIVE = [
+  { day: '24', song: 'Rylan' }, { day: '23', song: 'Weightless' }, { day: '22', song: 'Tape Loop' },
+  { day: '21', song: 'Nightshift' }, { day: '20', song: 'Motion Sickness' }, { day: '19', song: 'Fade Into You' },
+  { day: '18', song: 'Cranes in the Sky' }, { day: '17', song: 'Rylan' }, { day: '16', song: 'Weightless' },
+];
+
+class Component extends DCLogic {
+  state = {
+    screen: 'feed', posted: false, song: SONGS[3], query: '', caption: '',
+    sheet: null, lens: 'back', x: 50, y: 44, w: 40, rotate: -3, frost: 26,
+  };
+
+  go = (screen) => this.setState({ screen });
+
+  startDrag = (e) => {
+    const card = e.currentTarget;
+    const box = card.parentElement.getBoundingClientRect();
+    const r = card.getBoundingClientRect();
+    const offX = e.clientX - r.left, offY = e.clientY - r.top;
+    const cardH = (r.height / box.height) * 100;
+    const move = (ev) => {
+      const maxX = 100 - this.state.w;
+      const x = ((ev.clientX - offX - box.left) / box.width) * 100;
+      const y = ((ev.clientY - offY - box.top) / box.height) * 100;
+      this.setState({ x: Math.max(0, Math.min(maxX, x)), y: Math.max(0, Math.min(100 - cardH, y)) });
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  startRotate = (e) => {
+    e.stopPropagation();
+    const card = e.currentTarget.parentElement;
+    const r = card.getBoundingClientRect();
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    const start = Math.atan2(e.clientY - cy, e.clientX - cx);
+    const base = this.state.rotate;
+    const move = (ev) => {
+      const now = Math.atan2(ev.clientY - cy, ev.clientX - cx);
+      let deg = base + ((now - start) * 180) / Math.PI;
+      this.setState({ rotate: Math.max(-45, Math.min(45, Math.round(deg))) });
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  renderVals() {
+    const s = this.state;
+    const q = s.query.trim().toLowerCase();
+    const results = (q ? SONGS.filter(x => (x.t + ' ' + x.a).toLowerCase().includes(q)) : SONGS).map(x => {
+      const sel = s.song && s.song.t === x.t;
+      return {
+        ...x,
+        bg: sel ? '#232532' : 'transparent',
+        ring: sel ? '0 0 0 1px #9184d9' : '0 0 0 1px #292b31',
+        durColor: sel ? '#d2cefd' : '#75798c',
+        pick: () => this.setState({ song: x }),
+      };
+    });
+    const openSheet = (song, artist, dur) => () => this.setState({ sheet: { song, artist, dur } });
+    const front = s.lens === 'front';
+    const byTitle = (t) => SONGS.find(x => x.t === t) || { a: '—', d: '' };
+    return {
+      isFeed: s.screen === 'feed',
+      isCamera: s.screen === 'camera',
+      isSong: s.screen === 'song',
+      isCompose: s.screen === 'compose',
+      isProfile: s.screen === 'profile',
+      posted: s.posted,
+      posts: POSTS.map(p => ({ ...p, open: openSheet(p.song, p.artist, p.dur) })),
+      friends: FRIENDS.map(f => ({
+        ...f,
+        rim: f.posted ? 'linear-gradient(160deg,#b5abfc,#5d5294)' : '#292b31',
+        dim: f.posted ? 1 : 0.55,
+        nameColor: f.posted ? '#d2cefd' : '#75798c',
+      })),
+      archive: ARCHIVE.map((a, i) => ({
+        ...a,
+        photo: PHOTOS[i % PHOTOS.length],
+        open: openSheet(a.song, byTitle(a.song).a, byTitle(a.song).d),
+      })),
+      results, query: s.query, caption: s.caption,
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      onCaption: (e) => this.setState({ caption: e.target.value }),
+      pickedLabel: s.song ? 'SELECTED · ' + s.song.t.toUpperCase() : 'PICK A TRACK',
+      myTitle: s.song ? s.song.t : 'Pick a song',
+      myArtist: s.song ? s.song.a : '—',
+      myCaption: s.caption || 'no note',
+      myX: s.x, myY: s.y, myW: s.w, rotate: s.rotate, frost: s.frost,
+      myTransform: 'rotate(' + s.rotate + 'deg)',
+      myFrost: 'rgba(28,30,44,' + (s.frost / 100).toFixed(2) + ')',
+      sizeLabel: s.w + '%',
+      tiltLabel: s.rotate + '°',
+      frostLabel: s.frost + '%',
+      onRotate: (e) => this.setState({ rotate: +e.target.value }),
+      onSize: (e) => this.setState({ w: +e.target.value }),
+      onFrost: (e) => this.setState({ frost: +e.target.value }),
+      onDown: this.startDrag,
+      onRotDown: this.startRotate,
+      lensLabel: front ? 'FRONT LENS' : 'BACK LENS',
+      viewfinderLabel: front ? 'FRONT CAMERA' : 'BACK CAMERA',
+      backChipBg: front ? 'transparent' : '#3f424d',
+      backChipFg: front ? '#75798c' : '#e9e9ed',
+      frontChipBg: front ? '#3f424d' : 'transparent',
+      frontChipFg: front ? '#e9e9ed' : '#75798c',
+      useBack: () => this.setState({ lens: 'back' }),
+      useFront: () => this.setState({ lens: 'front' }),
+      goFeed: () => this.go('feed'),
+      goCamera: () => this.go('camera'),
+      goSong: () => this.go('song'),
+      goCompose: () => this.go('compose'),
+      goProfile: () => this.go('profile'),
+      capture: () => this.setState({ screen: 'song' }),
+      post: () => this.setState({ posted: true, screen: 'feed' }),
+      openMine: openSheet(s.song ? s.song.t : '', s.song ? s.song.a : '', s.song ? s.song.d : ''),
+      sheet: !!s.sheet,
+      sheetTitle: s.sheet ? s.sheet.song : '',
+      sheetArtist: s.sheet ? s.sheet.artist : '',
+      sheetDur: s.sheet ? s.sheet.dur : '',
+      closeSheet: () => this.setState({ sheet: null }),
+      services: [{ n: 'Spotify' }, { n: 'Apple Music' }, { n: 'YouTube Music' }],
+    };
+  }
+}
+
+</script>
+</body>
+</html>
