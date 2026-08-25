@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -22,10 +22,11 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build iOS
-        run: |
-          flutter build ios --release --config-only --no-codesign
+      - name: Generate iOS project
+        run: flutter build ios --release --config-only --no-codesign
 
+      - name: Build unsigned iOS app
+        run: |
           xcodebuild \
             -workspace ios/Runner.xcworkspace \
             -scheme Runner \
